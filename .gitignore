@@ -6,7 +6,8 @@ logs
 
 node_modules
 /node_modules
-
+env
+.env
 bower_components
 
 *.sublime*
