@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
+import { BASE_URL } from "../utils/constant";
 function Events() {
   const [events, setEvents] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
@@ -14,7 +15,7 @@ function Events() {
   useEffect(() => {
     const fetchEvents = async () => {
       try {
-        const res = await axios.get("http://localhost:5000/api/events");
+        const res = await axios.get(BASE_URL + "events");
         setEvents(res.data);
       } catch (error) {
         toast.error("Failed to fetch events");
@@ -25,7 +26,7 @@ function Events() {
 
   const handleDelete = async (eventId) => {
     try {
-      await axios.delete(`http://localhost:5000/api/events/${eventId}`, {
+      await axios.delete(BASE_URL + `events/${eventId}`, {
         headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
       });
 
@@ -49,7 +50,7 @@ function Events() {
     e.preventDefault();
     try {
       const res = await axios.put(
-        `http://localhost:5000/api/events/${editingEvent._id}`,
+        BASE_URL + `events/${editingEvent._id}`,
         {
           title: editTitle,
           date: editDate,

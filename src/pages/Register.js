@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
+import { BASE_URL } from "../utils/constant";
 
 function Register() {
   const [name, setName] = useState("");
@@ -13,15 +14,12 @@ function Register() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      let response = await axios.post(
-        "http://localhost:5000/api/auth/register",
-        {
-          name,
-          email,
-          password,
-          role,
-        }
-      );
+      let response = await axios.post(BASE_URL + "auth/register", {
+        name,
+        email,
+        password,
+        role,
+      });
       toast.success("Registered successfully! Please Login");
       navigate("/");
     } catch (error) {

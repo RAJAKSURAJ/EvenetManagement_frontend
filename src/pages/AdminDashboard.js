@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
+import { BASE_URL } from "../utils/constant";
 
 function AdminDashboard() {
   const [title, setTitle] = useState("");
@@ -27,7 +28,7 @@ function AdminDashboard() {
     formData.append("attendeeList", attendeeFile);
     formData.append("eventLink", eventLink);
     try {
-      await axios.post("http://localhost:5000/api/events/add", formData, {
+      await axios.post(BASE_URL + "events/add", formData, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
           "Content-Type": "multipart/form-data",
